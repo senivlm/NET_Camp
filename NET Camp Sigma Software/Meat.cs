@@ -8,39 +8,52 @@ namespace NET_Camp_Sigma_Software
 {
     public class Meat : Product
     {
-        public Category MeatCategory { get; set; }
         public Type MeatType { get; set; }
-        public Meat() { }
-        //public Meat(Category meatCategory, Type meatType) : base(name, price, weight)
-        //{
-        //    MeatCategory = meatCategory;
-        //    MeatType = meatType;
-        //}
-        public override int ChangePrice(int rate)
+        public Category MeatCategory { get; set; }
+        public Meat(): this(null, default(Type), default(Category),0.0, 0.0) { }
+        public Meat(string name, Type meatType, Category meatCategory,double weight, double price) 
+            : base(name, weight, price)
+        {
+            MeatCategory = meatCategory;
+            MeatType = meatType;
+        }
+        public override double ChangePrice(int rate)
         {
             Console.WriteLine("Enter your category");
-            string category = Console.ReadLine();
+            int userCategory = int.Parse(Console.ReadLine());
+            {
+                Console.WriteLine("Wrong input");
+            }
+            Category category;
+            category = (Category)Enum.GetValues(typeof(Category)).GetValue(userCategory - 1);
+
             switch (category)
             {
-                case "extra":
-                    Price = Price + (Price * rate / 100) + (int)Category.extra;
+                case Category.Extra:
+                    Price = Price + (Price * rate / 100.0) + (double)Category.Extra;
                     break;
-                case "sort1":
-                    Price = Price + (Price * rate / 100) + (int)Category.sort1;
-                    break;
-                case "sort2":
-                    Price = Price + (Price * rate / 100) + (int)Category.sort2;
+                case Category.Sort1:
+                    Price = Price + (Price * rate / 100) + (double)Category.Sort1;
                     break;
                 default:
-                    Console.WriteLine("Wrong enter!");
+                    Price = Price + (Price * rate / 100) + (int)Category.Sort2;
                     break;
             }
             return Price;
         }
         public override string ToString()
         {
-            return base.ToString() + " Meat category: "; 
+            return base.ToString() + " Type: " + MeatType + " Category: " + MeatCategory; 
         }
-
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Meat);
+        }
+        public override void Parse(string str)
+        {
+            base.Parse(str);
+            MeatType.ToString();
+            MeatCategory.ToString();
+        }
     }
 }

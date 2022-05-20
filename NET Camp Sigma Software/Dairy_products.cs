@@ -8,23 +8,32 @@ namespace NET_Camp_Sigma_Software
 {
     class Dairy_products : Product
     {
-        int expirationDate;
-        int expirationDateCoef;
-        public Dairy_products():this(null, 0, 0.0) { }
-        public Dairy_products(string name, int price, double weight) : base(name, price, weight) { }
-        public int ExpirationDate
+        public DateTime ExpirationDate { get; set; }
+        public Dairy_products() : this(null, 0.0, default(DateTime), 0.0) { }
+        public Dairy_products(string name, double weight, DateTime expirationDate, double price) 
+            : base(name, weight, price)
         {
-            get { return expirationDate; }
-            set { expirationDate = value; }
+            ExpirationDate = expirationDate;
         }
-        public override int ChangePrice(int rate)
+       
+        public override double ChangePrice(int rate)
         {
-            Price = Price + (int)(Price * rate / 100.0) + expirationDateCoef;
+            Price = Price + (double)(Price * rate / 100.0);
             return Price;
         }
         public override string ToString()
         {
-            return base.ToString() + " Date of expiration: " + expirationDate;
+            return base.ToString() + " Date of expiration: " + ExpirationDate;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Dairy_products);
+        }
+        public override void Parse(string str)
+        {
+            base.Parse(str);
+            string dateString = null;
+            DateTime.Parse(dateString);
         }
 
     }

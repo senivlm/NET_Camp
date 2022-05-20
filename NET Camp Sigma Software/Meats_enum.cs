@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace NET_Camp_Sigma_Software
 {
-    public enum  Category { extra, sort1, sort2 };
-    public enum Type { lamb, veal, pork, chicken };
+    public enum Type { Lamb, Veal, Pork, Chicken };
+    public enum  Category { Extra, Sort1, Sort2 };
 }
