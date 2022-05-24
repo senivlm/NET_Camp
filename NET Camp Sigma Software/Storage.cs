@@ -16,6 +16,7 @@ namespace NET_Camp_Sigma_Software
         public int ProductsAmount { get; set; }
         public double TotalWeight { get; set; }
         public double TotalPrice { get; set; }
+        //порушення інкапсуляції
         public Product[] AllProducts { get; set; }
         public Storage(): this(0, 0.0, 0.0) { }
         public Storage(int productsAmount, double totalWeight, double totalPrice)
